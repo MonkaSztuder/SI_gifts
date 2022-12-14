@@ -1,0 +1,37 @@
+package com.sample
+
+import javax.swing.*
+ 
+
+declare Pytanie
+	pytanie: String;
+	odpowiedzi: String[]
+end
+
+declare Odpowiedz
+	pytanie: String;
+	odpowiedz: String
+end
+
+function Odpowiedz wyswietlOkno(Pytanie pytanie){
+	
+	//uruchamia okienko i zwraca nr odpowiedzi
+	int nrOdp = JOptionPane.showOptionDialog(null,pytanie.getPytanie() , "Pytanie", JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, pytanie.getOdpowiedzi(), null);	
+	Odpowiedz odp = new Odpowiedz(pytanie.getPytanie(), pytanie.getOdpowiedzi()[nrOdp]);
+	return odp;
+}
+
+rule "test"
+	when
+	then
+	Pytanie pytanie = new Pytanie("test",new String[] {"Yes","No"});
+	insert(wyswietlOkno(pytanie));
+end
+
+rule "test2"
+	when
+		Odpowiedz(pytanie == "test" && odpowiedz == "Yes")
+	then
+	Pytanie pytanie = new Pytanie("test2",new String[] {"Yes", "No"});
+	insert(wyswietlOkno(pytanie));
+end
