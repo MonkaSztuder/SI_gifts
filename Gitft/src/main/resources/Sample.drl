@@ -265,3 +265,249 @@ rule "female_coworker_nope"
     then
 		ShowMessage("Get her a Holiday 4-pack. You can never go wrong with that.");
 end
+
+rule "gender_male"
+    when
+        Answer(question == "What is the gender of the person receiving your gift" && answer == "male")
+    then
+    Question question = new Question("This is gonna be hard. Guys don't buy gifts for other guys. Why are you buying him a gift?",
+    new String[] {"Dad", "Brother", "Crazy Uncle Charlie", "Co-worker", "Father-in-law"});
+    
+    insert(ShowWindow(question));
+end
+//ojciec
+
+rule "male_dad"
+    when
+        Answer(question == "This is gonna be hard. Guys don't buy gifts for other guys. Why are you buying him a gift?" && answer == "Dad")
+    then
+    Question question = new Question("What did you get him last holiday season?",
+    new String[] {"A tie", "Power tools", "A mug that says World's #1 Dad", "A new grill"});
+    
+    insert(ShowWindow(question));
+end
+
+rule "male_dad_tie"
+    when
+        Answer(question == "What did you get him last holiday season?" && answer == "A tie")
+    then
+    Question question = new Question("How original... how many ties does he own now?",
+    new String[] {">75", "<75 but >30"});
+    
+    insert(ShowWindow(question));
+end
+
+rule "male_dad_tie_not_much"
+    when
+        Answer(question == "How original... how many ties does he own now?" && answer == "<75 but >30")
+    then
+	ShowMessage("I know you are worried that Dad needs another tie, but if he can go and entire month without wearing the same tie twiceI think he is ok on ties. Let's go with a Holiday 4-Pack this year.");
+    
+end
+
+rule "male_dad_tie_much"
+    when
+        Answer(question == "How original... how many ties does he own now?" && answer == ">75")
+    then
+	ShowMessage("I think you can skip a year of the ties. How about this year you get him a gift that won't end up thrown in the back of the closet? Like a Holiday 4-pack");
+end
+
+rule "male_dad_tools"
+    when
+        Answer(question == "What did you get him last holiday season?" && answer == "Power tools")
+    then
+    Question question = new Question("So Dad is preety handy huh?",
+    new String[] {"Yes", "No, he just thinks he is. In reality, he just ends up making things worse when he tries to fix them"});
+    
+    insert(ShowWindow(question));
+end
+
+rule "male_dad_tools_handy"
+    when
+        Answer(question == "So Dad is preety handy huh?" && answer == "Yes")
+    then
+	ShowMessage("Then he already has all the tools he needs. Get him a Holiday 4-Pack instead");
+end
+
+rule "male_dad_tools_not_handy"
+    when
+        Answer(question == "So Dad is preety handy huh?" && answer == "No, he just thinks he is. In reality, he just ends up making things worse when he tries to fix them")
+    then
+	ShowMessage("Stop enabling this behaviour and get him a Holiday 4-Pack this year");
+end
+
+rule "male_dad_mug"
+    when
+        Answer(question == "What did you get him last holiday season?" && answer == "A mug that says World's #1 Dad")
+    then
+    Question question = new Question("And does he actually use this mug?",
+    new String[] {"Yes, thats the problem, He takes it everywhere and it's super embarrassing",
+     "No, I don't know why I even bother getting him gifts if he's not going to use them anyway"});
+    
+    insert(ShowWindow(question));
+end
+
+rule "male_dad_mug_yes"
+    when
+        Answer(question == "And does he actually use this mug?" && answer == "Yes, thats the problem, He takes it everywhere and it's super embarrassing")
+    then
+	ShowMessage("Here's what you do: ''accidentally'' drop the mug and get him a Holiday 4-Pack to make up for your clumsiness");
+end
+
+rule "male_dad_mug_no"
+    when
+        Answer(question == "And does he actually use this mug?" && answer == "No, I don't know why I even bother getting him gifts if he's not going to use them anyway")
+    then
+	ShowMessage("Then get him a gift he will actually use... like a Holiday 4-Pack");
+end
+
+rule "male_dad_grill"
+    when
+        Answer(question == "What did you get him last holiday season?" && answer == "A new grill")
+    then
+    Question question = new Question("Was he se excited to test out the new grill right away that almost started the house on fire?",
+    new String[] {"Yes, thats is exactly what happened", "No, he actually did start the house on fire"});
+    
+    insert(ShowWindow(question));
+end
+
+
+rule "male_dad_grill_sec"
+    when
+        Answer(question == "Was he se excited to test out the new grill right away that almost started the house on fire?" && answer == "No, he actually did start the house on fire")
+        ||
+        Answer(question == "Was he se excited to test out the new grill right away that almost started the house on fire?" && answer == "Yes, thats is exactly what happened")
+    then
+	ShowMessage("For the rest of the family's safety you need to get him a gift that is not a fire hazard... like a Holiday 4-Pack");
+end
+
+//brat
+
+rule "male_brother"
+    when
+        Answer(question == "This is gonna be hard. Guys don't buy gifts for other guys. Why are you buying him a gift?" && answer == "Brother")
+    then
+    Question question = new Question("",
+    new String[] {"Younger", "Older"});
+    
+    insert(ShowWindow(question));
+end
+
+rule "male_brother_younger"
+    when
+        Answer(question == "" && answer == "Younger")
+    then
+    Question question = new Question("So you probably picked on him when you were growing up?",
+    new String[] {"Yeah, sure did", "No, never!"});
+    
+    insert(ShowWindow(question));
+end
+
+rule "male_brother_younger_picked"
+    when
+        Answer(question == "So you probably picked on him when you were growing up?" && answer == "Yeah, sure did")
+    then
+	ShowMessage("Show him how much you've grown and make amends for your adolescent bullying by getting him a Holiday 4-Pack");
+end
+
+rule "male_brother_younger_not_picked"
+    when
+        Answer(question == "So you probably picked on him when you were growing up?" && answer == "No, never!")
+    then
+	ShowMessage("You are the best older brother! You have probably already bought him multiple Holiday 4-Packs");
+end
+
+
+rule "male_brother_older"
+    when
+        Answer(question == "" && answer == "Older")
+    then
+    Question question = new Question("So he probably picked on him when you were growing up?",
+    new String[] {"He was a master of the noogie", "No, never!"});
+    
+    insert(ShowWindow(question));
+end
+
+rule "male_brother_older_picked"
+    when
+        Answer(question == "So he probably picked on him when you were growing up?" && answer == "He was a master of the noogie")
+    then
+	ShowMessage("Here's what you do: Get him a Holiday 4-Pack, then get yourself a 10-Pack and passive-aggresively demonstrate your newfound superiority");
+end
+
+rule "male_brother_older_not_picked"
+    when
+        Answer(question == "So he probably picked on him when you were growing up?" && answer == "No, never!")
+    then
+	ShowMessage("You have the best Older brother ever! Get a pair of Holiday 4-Packs and enjoy some quality time with this great guy");
+end
+
+rule "male_uncle"
+    when
+        Answer(question == "This is gonna be hard. Guys don't buy gifts for other guys. Why are you buying him a gift?" && answer == "Crazy Uncle Charlie")
+    then
+    Question question = new Question("Ah, yes, Crazy Uncle Charlie... When was the last time you saw him?",
+    new String[] {"<html>Last christmas - He drank too<br> much eggnog and passed out on the <br>couch while watching basketball.</html>",
+    "<html>A couple weekds ago at Thanksgiving - He <br>ate too much Turkey and passed out on the <br>couch while watching football</html>",
+    "<html>Last week when he invited himself<br> over then passes out on the<br> couch while watching 'scandal'</html>"});
+    
+    insert(ShowWindow(question));
+end
+
+rule "male_uncle_answer"
+    when
+        Answer(question == "Ah, yes, Crazy Uncle Charlie... When was the last time you saw him?")
+    then
+	ShowMessage("Get him a Holiday 4-Pack and get him off your couch!");
+end
+
+rule "male_coworker"
+    when
+        Answer(question == "This is gonna be hard. Guys don't buy gifts for other guys. Why are you buying him a gift?" && answer == "Co-worker")
+    then
+    Question question = new Question("Is this person your boss?",
+    new String[] {"Yes", "No"});
+    
+    insert(ShowWindow(question));
+end
+
+rule "male_coworker_boss"
+    when
+        Answer(question == "Is this person your boss?" && answer == "Yes")
+    then
+    Question question = new Question("Do you like him?",
+    new String[] {"Yes", "No"});
+    
+    insert(ShowWindow(question));
+end
+
+rule "male_coworker_not_boss"
+    when
+        Answer(question == "Is this person your boss?" && answer == "No")
+    then
+	ShowMessage("No need to but this person a gift. Take the money you would have spent and put it towards a Holiday 5-Pack on your own");
+end
+
+rule "male_coworker_boss_like"
+    when
+        Answer(question == "Do you like him?" && answer == "Yes")
+    then
+	ShowMessage("Get him a Holiday 4-Pack. Can you say 'promotion'?");
+end
+
+rule "male_coworker_boss_not_like"
+    when
+        Answer(question == "Do you like him?" && answer == "No")
+    then
+	ShowMessage("Get him a Holiday 4-Pack consisting of 4 weekday, day games and enjoy the extra time he is out of the office");
+end
+
+rule "male_father_in_law"
+    when
+        Answer(question == "This is gonna be hard. Guys don't buy gifts for other guys. Why are you buying him a gift?" && answer == "Father-in-law")
+    then
+	ShowMessage("Face it, you'll never be good enough for his daughter. Your best chance of redeeming yourself would be to get him a Holiday 4-Pack");
+end
+
+
+
